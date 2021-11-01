@@ -34,7 +34,7 @@ export default class SelectCategory extends Vue {
   })
   value!: string;
 
-  public getCategoryList: string[] = [];
+  public getCategoryList!: string[];
 
   public fetchCategoryList!: () => any;
 
