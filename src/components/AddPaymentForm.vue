@@ -3,6 +3,7 @@
     <input placeholder="Value" v-model="value"/>
     <input placeholder="Category" v-model="category"/>
     <input placeholder="Date" v-model="date"/>
+    <select-category v-model="category" />
     <button @click="onSave">Save</button>
   </div>
 </template>
@@ -10,9 +11,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { IPayment } from '@/interfaces/payment';
+import SelectCategory from '@/components/SelectCategory.vue';
 
 @Component({
   name: 'AddPaymentForm',
+  components: {
+    SelectCategory,
+  },
 })
 export default class AddPaymentForm extends Vue {
   value: IPayment['value'] = 0;

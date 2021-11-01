@@ -1,10 +1,16 @@
 <template>
   <div class="wrapper">
-    <button v-for="(page, idx) in pagination"
-            :key="idx"
-            @click="navigateTo(page)">
-      {{ page }}
-    </button>
+    <div @click="navigateTo(cur-1)">-</div>
+    <div
+      class="page"
+      :class="{ active: cur === i }"
+      v-for="i in amout"
+      :key="i"
+      @click="navigateTo(i)"
+    >
+      {{ i }}
+    </div>
+    <div @click="navigateTo(cur+1)">+</div>
   </div>
 </template>
 
@@ -29,20 +35,31 @@ export default class PaymentsPagination extends Vue {
   })
   itemsInOnePage!: number;
 
-  pagination: number[] = [];
+  @Prop({
+    required: true,
+    type: Number,
+    default: 0,
+  })
+  cur!: number;
 
-  created(): void {
-    this.pagination = this.getPagination();
+  // pagination: number[] = [];
+
+  get amout(): number {
+    return Math.ceil(this.countItems / this.itemsInOnePage);
   }
+
+  // created(): void {
+  //   // this.pagination = this.getPagination();
+  // }
 
   navigateTo(page: number): void {
     this.$emit('navigateTo', page);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  getPagination(): number[] {
-    return [...new Array(Math.ceil(this.countItems / this.itemsInOnePage))].map((e, i) => i + 1);
-  }
+  // getPagination(): number[] {
+  //   return [...new Array(Math.ceil(this.countItems / this.itemsInOnePage))].map((e, i) => i + 1);
+  // }
 }
 
 </script>
