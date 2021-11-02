@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
 import Payment from '../views/Payment.vue';
 import Auth from '../views/Auth.vue';
+import Notfound from '../views/Notfound.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '*',
     redirect: '/notfound',
+    component: Notfound,
   },
 ];
 
