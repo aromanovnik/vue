@@ -3,13 +3,13 @@
     <input placeholder="Value" v-model="value"/>
     <input placeholder="Category" v-model="category"/>
     <input placeholder="Date" v-model="date"/>
-    <select-category v-model="category" />
+    <select-category v-model="category"/>
     <button @click="onSave">Save</button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { IPayment } from '@/interfaces/payment';
 import SelectCategory from '@/components/SelectCategory.vue';
 
@@ -20,9 +20,23 @@ import SelectCategory from '@/components/SelectCategory.vue';
   },
 })
 export default class AddPaymentForm extends Vue {
-  value: IPayment['value'] = 0;
+  @Prop({
+    required: false,
+    type: Number,
+    default: 0,
+  })
+  valueProp!: IPayment['value'];
 
-  category: IPayment['category'] = '';
+  @Prop({
+    required: false,
+    type: String,
+    default: '',
+  })
+  categoryProp!: IPayment['category'];
+
+  value: IPayment['value'] = this.valueProp ?? 0;
+
+  category: IPayment['category'] = this.categoryProp ?? '';
 
   date: IPayment['date'] = '';
 

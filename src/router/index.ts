@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Payment from '../views/Payment.vue';
 import Auth from '../views/Auth.vue';
 import Notfound from '../views/Notfound.vue';
+import AddPayment from '../views/AddPayment.vue';
 
 Vue.use(VueRouter);
 
@@ -12,6 +13,12 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Payment',
     component: Payment,
+  },
+  {
+    path: '/add/payment/:category',
+    name: 'AddPayment',
+    component: AddPayment,
+    props: (route) => ({ value: route.query.value }),
   },
   {
     path: '/home',
@@ -57,7 +64,7 @@ router.beforeEach((to, from, next) => {
 });
 
 const getTitleByRouteName = (routeName: string): string => {
-  const titles: {[key: string]: string} = {
+  const titles: { [key: string]: string } = {
     Dashboard: 'Take a look on your payments and add more!',
     About: 'Anything about our awesome application!',
     NotFound: 'Oops! Seems like we lost this page :(',
